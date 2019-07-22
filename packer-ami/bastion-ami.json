@@ -2,16 +2,16 @@
     "variables": {
         "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
-        "region":         "us-west-2"
+        "region":         "ap-south-1"
     },
     "builders": [
         {
             "access_key": "{{user `aws_access_key`}}",
+            "secret_key": "{{user `aws_secret_key`}}",
             "ami_name": "bastion-ami",
             "instance_type": "t2.micro",
-            "region": "us-west-2",
-            "secret_key": "{{user `aws_secret_key`}}",
-            "source_ami": "ami-08692d171e3cf02d6",            
+            "region": "ap-south-1",
+            "source_ami": "ami-04125d804acca5692",            
             "ssh_username": "ubuntu",
             "type": "amazon-ebs"
         }
@@ -21,9 +21,9 @@
             "type": "shell",
             "inline": ["sudo apt-get update -y && sudo apt-get install python-minimal -y"]
           },
-        {
-            "type": "ansible",
-            "playbook_file": "../ansible-cfm/bastion.yml"
-          }
+          {
+              "type": "ansible",
+              "playbook_file": "../ansible-cfm/bastion.yml"
+            }
     ]
 }
